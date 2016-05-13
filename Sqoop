@@ -3,3 +3,14 @@ $ sqoop list-databases \
 > --connect "jdbc:mysql://quickstart.cloudera:3306" \
 > --username retail_dba \
 > --password cloudera 
+/ ** Developing Word Count Program
+Create a file and type some lines and save as wordcount.txt file then copy to HDFS /user/cloudera/wordcount.txt
+data = sc.textFile("/user/cloudera/wordcount.txt")
+dataFlatMap = data.flatMap(lambda x: x.split(" ")
+dataMap = dataFlatMap.map(lambda x: (x,1)
+dataReduceByKey = dataMap.reduceByKey(lambda x,y: x+y)
+dataReduceByKey.saveAsTextFile("/user/cloudera/wordcountoutput")
+for i in dataReduceByKey.collect():
+print(i)
+** / 
+
